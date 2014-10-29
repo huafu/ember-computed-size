@@ -1,0 +1,10 @@
+<h2 id='title'>Welcome to Ember.js</h2>
+
+<div>
+  {{input value=inputText placeholder='type some text here' size=inputText.length}}
+</div>
+<div>
+  {{#view 'with-info-box' tagName='span'}}{{inputText}}{{/view}}
+</div>
+
+{{outlet}}
