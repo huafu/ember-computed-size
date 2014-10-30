@@ -6,17 +6,17 @@ function canComputeSize(view) {
 
 var ComputedSizeMixin = Ember.Mixin.create({
 
-  computedWidth: function () {
+  computedWidth: Ember.computed('windowSizeService.innerWidth', function () {
     if (canComputeSize(this)) {
       return this.$().outerWidth();
     }
-  }.property('windowSizeService.innerWidth').readOnly(),
+  }).readOnly(),
 
-  computedHeight: function () {
+  computedHeight: Ember.computed('windowSizeService.innerHeight', function () {
     if (canComputeSize(this)) {
       return this.$().outerHeight();
     }
-  }.property('windowSizeService.innerHeight').readOnly(),
+  }).readOnly(),
 
   syncComputedSize: function () {
     if (canComputeSize(this)) {
@@ -25,25 +25,25 @@ var ComputedSizeMixin = Ember.Mixin.create({
     }
   },
 
-  scheduleSyncComputedSize: function () {
+  scheduleSyncComputedSize: Ember.on('didInsertElement', 'willClearRender', function () {
     if (canComputeSize(this)) {
       Ember.run.scheduleOnce('afterRender', this, 'syncComputedSize');
     }
-  }.on('didInsertElement').on('willClearRender'),
+  }),
 
-  setupWithComputedSizeMixin: function () {
+  setupWithComputedSizeMixin: Ember.on('didInsertElement', function () {
     if (!this._domSubtreeChangedListener) {
       this._domSubtreeListener = Ember.run.bind(this, 'scheduleSyncComputedSize');
       this.$().on('DOMSubtreeModified propertychange', this._domSubtreeListener);
     }
-  }.on('didInsertElement'),
+  }),
 
-  teardownWithComputedSizeMixin: function () {
+  teardownWithComputedSizeMixin: Ember.on('willDestroyElement', function () {
     if (this._domSubtreeListener) {
       this.$().off('DOMSubtreeModified propertychange', this._domSubtreeListener);
       this._domSubtreeListener = null;
     }
-  }.on('willDestroyElement')
+  })
 
 });
 

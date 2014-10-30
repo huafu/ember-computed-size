@@ -2,17 +2,17 @@ import Ember from 'ember';
 
 var WindowSizeService = Ember.Object.extend({
 
-  innerWidth: function () {
+  innerWidth: Ember.computed(function () {
     return Ember.$(window).innerWidth();
-  }.property().readOnly(),
+  }).readOnly(),
 
-  innerHeight: function () {
+  innerHeight: Ember.computed(function () {
     return Ember.$(window).innerHeight();
-  }.property().readOnly(),
+  }).readOnly(),
 
-  scheduleSyncWindowSize: function () {
+  scheduleSyncWindowSize: Ember.on('init', function () {
     Ember.run.debounce(this, 'syncWindowSize', 100);
-  }.on('init'),
+  }),
 
   syncWindowSize: function () {
     if (this.isDestroyed || this.isDestroying) {
@@ -24,19 +24,19 @@ var WindowSizeService = Ember.Object.extend({
     });
   },
 
-  setupWindowSize: function () {
+  setupWindowSize: Ember.on('init', function () {
     if (!this._handler) {
       this._handler = Ember.run.bind(this, 'scheduleSyncWindowSize');
       Ember.$(window).on('resize', this._handler);
     }
-  }.on('init'),
+  }),
 
-  teardownWindowSize: function () {
+  teardownWindowSize: Ember.on('destroy', function () {
     if (this._handler) {
       Ember.$(window).on('resize', this._handler);
       this._handler = null;
     }
-  }.on('destroy')
+  })
 
 });
 
