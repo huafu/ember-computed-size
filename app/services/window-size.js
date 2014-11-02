@@ -33,7 +33,7 @@ var WindowSizeService = Ember.Object.extend({
 
   teardownWindowSize: Ember.on('destroy', function () {
     if (this._handler) {
-      Ember.$(window).on('resize', this._handler);
+      Ember.$(window).off('resize', this._handler);
       this._handler = null;
     }
   })
