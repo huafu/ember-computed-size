@@ -1,5 +1,5 @@
 export function initialize(container, application) {
-  application.inject('view', 'windowSizeService', 'service:window-size');
+  application.inject('view', 'windowSizeService', 'ember-computed-size@service:window-size');
 }
 
 export default {
