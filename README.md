@@ -9,6 +9,8 @@ views so that you can bind some properties on `windowSizeService.innerWidth` and
 as well as listening for `DOMSubtreeModified` (and `propertychange` for IE) to schedule the update of
 `computedWidth` and `computedHeight` of your views.
 
+View a very bare simple demo [there](http://huafu.github.io/ember-computed-size/).
+
 
 ## Installation
 
