@@ -1,4 +1,16 @@
-<h2 id='title'>Welcome to Ember.js</h2>
+<div class="social-networks-bar">
+  <iframe src="http://ghbtns.com/github-btn.html?user=huafu&repo=ember-computed-size&type=watch&count=true"
+          allowtransparency="true" frameborder="0" scrolling="0" width="80" height="20"></iframe>
+  <iframe
+      src="//platform.twitter.com/widgets/follow_button.html?screen_name=HuafuGandon"
+      style="width: 240px; height: 20px;"
+      allowtransparency="true"
+      frameborder="0"
+      scrolling="no">
+  </iframe>
+</div>
+
+<h2 id="title">ember-computed-size</h2>
 
 <div>
   {{input value=inputText placeholder='type some text here' size=inputText.length}}
@@ -6,5 +18,11 @@
 <div>
   {{#view 'with-info-box' tagName='span'}}{{inputText}}{{/view}}
 </div>
+
+<br/><br/><br/>
+
+{{#view 'with-info-box' useRealSize=true style='height: 40%;'}}
+  <div style="width: 100%; height: 100%;">This div has width and height set to 100%. Parent has height set to 40%</div>
+{{/view}}
 
 {{outlet}}

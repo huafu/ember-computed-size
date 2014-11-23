@@ -23,6 +23,12 @@ as well as listening for `DOMSubtreeModified` (and `propertychange` for IE) to s
       // here you have now 2 properties `computedWidth` and `computedHeight` which
       // are updated when needed, corresponding to the outerWidth and outerHeight of
       // your view main element.
+      
+      // there is also an option to get the **real** computed `width` and `height`,
+      // say if you had set some `width` and/or `height` in CSS. For that, set the
+      // `useRealSize` property to true, and this addon will reset CSS `width` and
+      // `height` to `auto` before computing them, after what it'd reset the override.
+      //useRealSize: true
     });
     ```
 
